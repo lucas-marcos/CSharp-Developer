@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "EuclidCircularB";
+  src: url("./assets/fontes/EuclidCircularB-Semibold.otf") format("opentype");
+}
+
+body {
+  margin: 0px !important;
+}
+
+.titulo {
+  font-family: "EuclidCircularB";
+  font-weight: 700;
+  font-size: 26px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.box {
+  background: #fff;
+  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.12);
+}
+
+.titulo-menu {
+  font-family: "EuclidCircularB";
+  font-size: 22.75px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 0px !important;
+}
+
+
+.input-text::placeholder {
+  padding-left: 19px; /* Ajuste o valor conforme necessário */
+  padding-right: 19px; /* Ajuste o valor conforme necessário */
+}
