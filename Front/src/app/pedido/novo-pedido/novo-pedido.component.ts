@@ -20,7 +20,7 @@ export class NovoPedidoComponent implements OnInit {
     produtosDoCarrinho: [],
   };
 
-  constructor(private http: HttpClient,  private toastr: ToastrService) {}
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.obterClientes();
@@ -56,7 +56,7 @@ export class NovoPedidoComponent implements OnInit {
     return 0;
   }
 
-  finalizarPedido(){
+  finalizarPedido() {
     const url = 'https://localhost:7042/api/pedido';
 
     this.http.post<any[]>(url, this.pedido).subscribe(
@@ -64,12 +64,12 @@ export class NovoPedidoComponent implements OnInit {
         this.toastr.success('Pedido finalizado com sucesso!');
       },
       (error) => {
-        this.toastr.error('Erro ao finalizar pedido:', error.error);
+        this.toastr.error(error.error, 'Pedido');
       }
     );
   }
 
-  limparCarrinho(){
+  limparCarrinho() {
     this.pedido.produtosDoCarrinho = [];
     this.pedido.valorFrete = 0;
   }
@@ -77,7 +77,7 @@ export class NovoPedidoComponent implements OnInit {
   obterPrecoFrete() {
     var qtdItens = 0;
 
-    this.pedido.produtosDoCarrinho.forEach(produto => {
+    this.pedido.produtosDoCarrinho.forEach((produto) => {
       qtdItens += produto.quantidade;
     });
 
@@ -88,7 +88,7 @@ export class NovoPedidoComponent implements OnInit {
         this.pedido.valorFrete = response;
       },
       (error) => {
-        this.toastr.error('Erro ao obter o valor do frete:', error);
+        this.toastr.error(error.error, 'Frete');
       }
     );
   }
@@ -101,7 +101,7 @@ export class NovoPedidoComponent implements OnInit {
         this.clientes = response;
       },
       (error) => {
-        this.toastr.error('Erro ao obter a lista de clientes:', error);
+        this.toastr.error(error.error, 'Cliente');
       }
     );
   }
@@ -114,7 +114,7 @@ export class NovoPedidoComponent implements OnInit {
         this.produtos = response;
       },
       (error) => {
-        this.toastr.error('Erro ao obter a lista de produtos:', error);
+        this.toastr.error(error.error, 'Produto');
       }
     );
   }
