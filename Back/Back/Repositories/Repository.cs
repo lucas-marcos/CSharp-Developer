@@ -1,5 +1,5 @@
 using Back.Data;
-using Back.Repositories.Interface;
+using Back.Interface.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace Back.Repositories;

@@ -10,5 +10,8 @@ public class MappingProfile : Profile
     {
         CreateMap<ClienteTO, Cliente>();
         CreateMap<Cliente, ClienteTO>();
+        
+        CreateMap<ProdutoTO, Produto>();
+        CreateMap<Produto, ProdutoTO>();
     }
 }

@@ -1,7 +1,6 @@
-using Back.Interface;
 using Back.Models;
 
-namespace Back.Repositories.Interface;
+namespace Back.Interface.Repository;
 
 public interface IClienteRepository : IRepository<Cliente>, IScoped
 {

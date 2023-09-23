@@ -1,6 +1,6 @@
 using Back.Data;
+using Back.Interface.Repository;
 using Back.Models;
-using Back.Repositories.Interface;
 
 namespace Back.Repositories;
 

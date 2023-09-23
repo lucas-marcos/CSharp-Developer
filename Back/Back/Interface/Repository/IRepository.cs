@@ -1,4 +1,4 @@
-namespace Back.Repositories.Interface;
+namespace Back.Interface.Repository;
 
 public interface IRepository<TEntity>
 {

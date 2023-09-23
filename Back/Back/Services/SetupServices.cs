@@ -8,17 +8,46 @@ public class SetupServices : ISetupServices
 {
     private readonly IClienteServices _clienteServices;
     private readonly IConsultadorServices _consultadorServices;
+    private readonly IProdutoServices _produtoServices;
 
-    public SetupServices(IClienteServices clienteServices, IConsultadorServices consultadorServices)
+    public SetupServices(IClienteServices clienteServices, IConsultadorServices consultadorServices, IProdutoServices produtoServices)
     {
         _clienteServices = clienteServices;
         _consultadorServices = consultadorServices;
+        _produtoServices = produtoServices;
     }
 
     public void Setup()
     {
         AtualizarBaseClientes();
+        AtualizarBaseProdutos();
     }
+
+    private void AtualizarBaseProdutos()
+    {
+        RemoverProdutos();
+        SalvarDadosProdutos();
+    }
+
+    private void SalvarDadosProdutos()
+    {
+        var produtos = ConsultarProdutosApi();
+        _produtoServices.AdicionarSalvar(produtos);
+    }
+
+    private List<Produto> ConsultarProdutosApi()
+    {
+        var produtosJson = _consultadorServices.RetornarDadosRequest("https://private-anon-f30d07d849-maximatech.apiary-mock.com/fullstack/produto");
+
+        return produtosJson.FromJsonIgnoreId<List<Produto>>();
+    }
+
+    private void RemoverProdutos()
+    {
+        var produtosParaRemover = _produtoServices.BuscarTodos();
+        _produtoServices.RemoverSalvar(produtosParaRemover);
+    }
+
 
     private void AtualizarBaseClientes()
     {
