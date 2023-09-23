@@ -4,6 +4,7 @@ namespace Back.Interface.Services;
 
 public interface IPedidoServices : IScoped
 {
-    Pedido Cadastrar(Pedido pedido);
+    void Cadastrar(Pedido pedido);
     List<Pedido> BuscarTodos();
+    void RemoverSalvar(List<Pedido> pedidos);
 }

@@ -22,11 +22,11 @@ public class PedidoController : ControllerBase
     [HttpPost]
     public ActionResult<PedidoTO> Post(PedidoDTO pedidoDto)
     {
-        var pedido = _pedidoServices.Cadastrar(_mapper.Map<Pedido>(pedidoDto));
+        _pedidoServices.Cadastrar(_mapper.Map<Pedido>(pedidoDto));
 
-        return Ok(_mapper.Map<PedidoTO>(pedido));
+        return Ok();
     }
-    
+
     [HttpGet]
     public ActionResult<List<PedidoTO>> Get()
     {
@@ -34,5 +34,4 @@ public class PedidoController : ControllerBase
 
         return Ok(_mapper.Map<List<PedidoTO>>(pedido));
     }
-    
 }

@@ -10,7 +10,7 @@ public class PedidoDTO
 
     [Required(ErrorMessage = "Adicione um item no carrinho")]
     [MinLength(1, ErrorMessage = "Adicione um item no carrinho")]
-    public List<ProdutosDoCarrinho> ProdutosDoCarrinho { get; set; }
+    public List<ProdutosDoCarrinhoDTO> ProdutosDoCarrinho { get; set; }
 
     [Required(ErrorMessage = "O ValorFrete é obrigatório.")]
     [Range(0, double.MaxValue, ErrorMessage = "O ValorFrete não pode ser negativo.")]

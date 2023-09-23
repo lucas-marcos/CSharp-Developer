@@ -15,6 +15,12 @@ public class MappingProfile : Profile
         CreateMap<ProdutoTO, Produto>();
         CreateMap<Produto, ProdutoTO>();
 
+        CreateMap<ProdutosDoCarrinhoDTO, ProdutosDoCarrinho>();
+        CreateMap<ProdutosDoCarrinho, ProdutosDoCarrinhoDTO>();
+
+        CreateMap<ProdutosDoCarrinho, ProdutosDoCarrinhoTO>();
+        CreateMap<ProdutosDoCarrinhoTO, ProdutosDoCarrinho>();
+
         CreateMap<PedidoDTO, Pedido>();
         CreateMap<Pedido, PedidoTO>()
             .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Cliente))
@@ -22,8 +28,8 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.ClienteId, opt => opt.MapFrom(src => src.ClienteId))
             .ForMember(dest => dest.ValorFrete, opt => opt.MapFrom(src => src.ValorFrete))
-            .ForMember(dest => dest.QtdItens, opt =>opt.MapFrom(src => src.ProdutosDoCarrinho.Sum(a => a.Quantidade)))
-            .ForMember(dest => dest.ValorTotal, opt => 
+            .ForMember(dest => dest.QtdItens, opt => opt.MapFrom(src => src.ProdutosDoCarrinho.Sum(a => a.Quantidade)))
+            .ForMember(dest => dest.ValorTotal, opt =>
                 opt.MapFrom(src => src.ProdutosDoCarrinho.Sum(a =>
                     a.Quantidade * a.Produto.PrecoUnitario)));
     }

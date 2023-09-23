@@ -14,11 +14,11 @@ public class PedidoServices : IPedidoServices
     }
 
     public List<Pedido> BuscarTodos() => _pedidoRepository.BuscarTodos().ToList();
+    public void RemoverSalvar(List<Pedido> pedidos) => _pedidoRepository.RemoverSalvar(pedidos);
 
-    public Pedido Cadastrar(Pedido pedido)
+    public void Cadastrar(Pedido pedido)
     {
         _pedidoRepository.AdicionarAtualizarSalvar(pedido);
 
-        return pedido;
     }
 }

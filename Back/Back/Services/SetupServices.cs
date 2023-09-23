@@ -9,18 +9,27 @@ public class SetupServices : ISetupServices
     private readonly IClienteServices _clienteServices;
     private readonly IConsultadorServices _consultadorServices;
     private readonly IProdutoServices _produtoServices;
+    private readonly IPedidoServices _pedidoServices;
 
-    public SetupServices(IClienteServices clienteServices, IConsultadorServices consultadorServices, IProdutoServices produtoServices)
+    public SetupServices(IClienteServices clienteServices, IConsultadorServices consultadorServices, IProdutoServices produtoServices, IPedidoServices pedidoServices)
     {
         _clienteServices = clienteServices;
         _consultadorServices = consultadorServices;
         _produtoServices = produtoServices;
+        _pedidoServices = pedidoServices;
     }
 
     public void Setup()
     {
+        RemoverPedidos();
         AtualizarBaseClientes();
         AtualizarBaseProdutos();
+    }
+
+    private void RemoverPedidos()
+    {
+        var pedidos = _pedidoServices.BuscarTodos();
+        _pedidoServices.RemoverSalvar(pedidos);
     }
 
     private void AtualizarBaseProdutos()
