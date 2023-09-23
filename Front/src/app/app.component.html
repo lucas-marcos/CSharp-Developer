@@ -1,4 +1,9 @@
-<app-header></app-header>
-<div class="conteudo-pagina">
+<div *ngIf="exibirHeader">
+  <app-header></app-header>
+  <div class="conteudo-pagina">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div *ngIf="!exibirHeader">
   <router-outlet></router-outlet>
 </div>
