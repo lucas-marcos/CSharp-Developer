@@ -5,6 +5,7 @@ import { ConsultarPedidoComponent } from './pedido/consultar-pedido/consultar-pe
 import { ClienteComponent } from './cadastro/cliente/cliente.component';
 import { ProdutoComponent } from './cadastro/produto/produto.component';
 import { LoginComponent } from './cadastro/login/login.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   { path: 'pedido/novo', component: NovoPedidoComponent },

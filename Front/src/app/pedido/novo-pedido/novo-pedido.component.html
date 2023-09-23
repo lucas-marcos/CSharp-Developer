@@ -137,12 +137,12 @@
                 class="form-control col-2"
                 [(ngModel)]="produtoDoCarrinho.quantidade"
               />
-              <p class="my-auto preco-produto">
+              <p class="my-auto preco-produto" id="precoUnitarioPorProduto">
                 X
                 {{ produtoDoCarrinho.produto.precoUnitario | currency : "BRL" }}
               </p>
             </div>
-            <p>
+            <p id="precoFinalPorProduto">
               {{
                 calcularValorTotal(produtoDoCarrinho)
                   | currency : "BRL" : "symbol" : "1.2-2"
@@ -208,7 +208,6 @@
       </div>
 
       <div class="d-flex row col-6 justify-content-center">
-        <div class="row col-8">
           <button
             class="btn btn-success botao-finlizar"
             style="background-color: #5cb85c; border-radius: 4px"
@@ -216,7 +215,6 @@
           >
             Finalizar Pedido
           </button>
-        </div>
         <button class="btn btn-dark botao-finlizar bg-white text-dark" (click)="limparCarrinho()">
           Limpar Carrinho
         </button>

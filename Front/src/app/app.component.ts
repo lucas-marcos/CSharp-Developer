@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'MaximaTech.Spa';
 
-  exibirHeader: boolean = true;
+  exibirHeader: boolean = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
