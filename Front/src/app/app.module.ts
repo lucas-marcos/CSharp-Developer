@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConsultarPedidoComponent } from './pedido/consultar-pedido/consultar-pedido.component';
 import { ClienteComponent } from './cadastro/cliente/cliente.component';
+import { ProdutoComponent } from './cadastro/produto/produto.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ClienteComponent } from './cadastro/cliente/cliente.component';
     NovoPedidoComponent,
     ConsultarPedidoComponent,
     ClienteComponent,
+    ProdutoComponent,
   ],
   imports: [
     BrowserAnimationsModule,
