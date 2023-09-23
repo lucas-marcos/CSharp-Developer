@@ -96,28 +96,51 @@
     </div>
 
     <div class="mt-5">
-      <div *ngFor="let produto of produtos" class="border-top border-bottom">
-          <div class="d-flex pb-3 pt-3">
-              <img
-                  [src]="produto.imagemUrl"
-                  style="
-                      border-radius: 241.5px;
-                      background: url(produto.imagemUrl),
-                          lightgray 50% / cover no-repeat;
-                      width: 101px;
-                      height: 101px;
-                      flex-shrink: 0;
-                  "
-              />
-              <div class="descricao-e-codigo ml-4 mt-auto">
-                  <h5 class="codigo-produto">{{ produto.codigo }}</h5>
-                  <p class="nome-produto">
-                      <span class="text-limitado" [title]="produto.nome">{{ produto.nome }}</span>
-                  </p>
-              </div>
+      <div
+        *ngFor="let produto of produtos"
+        class="border-top border-bottom pb-3 pt-3"
+      >
+        <div class="d-flex">
+          <img
+            [src]="produto.imagemUrl"
+            style="
+              border-radius: 241.5px;
+              background: url(produto.imagemUrl),
+                lightgray 50% / cover no-repeat;
+              width: 101px;
+              height: 101px;
+              flex-shrink: 0;
+            "
+          />
+          <div class="descricao-e-codigo ml-4 mt-auto col-9">
+            <h5 class="codigo-produto">{{ produto.codigo }}</h5>
+            <p class="nome-produto">
+              <span class="text-limitado" [title]="produto.nome">{{
+                produto.nome
+              }}</span>
+            </p>
           </div>
-      </div>
-  </div>
 
+          <div class="col-3">
+            <div class="form-group d-flex align-items-center gap-2">
+              <input
+                type="number"
+                id="quantidade"
+                placeholder="1"
+                class="form-control col-2"
+              />
+              <p class="my-auto preco-produto">
+                X {{ produto.precoUnitario | currency : "BRL" }}
+              </p>
+            </div>
+            <p>
+              {{
+                produto.precoUnitario | currency : "BRL" : "symbol" : "1.2-2"
+              }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

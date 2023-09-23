@@ -1,10 +1,11 @@
 @font-face {
   font-family: "EuclidCircularB";
-  src: url("./assets/fontes/EuclidCircularB-Semibold.otf") format("opentype");
+  src: url("./assets/fontes/EuclidCircularB-Regular.otf") format("opentype");
 }
 
 body {
   margin: 0px !important;
+  font-family: "EuclidCircularB" !important;
 }
 
 .titulo {
