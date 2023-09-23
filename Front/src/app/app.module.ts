@@ -9,12 +9,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConsultarPedidoComponent } from './pedido/consultar-pedido/consultar-pedido.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     NovoPedidoComponent,
+    ConsultarPedidoComponent,
   ],
   imports: [
     BrowserAnimationsModule,
