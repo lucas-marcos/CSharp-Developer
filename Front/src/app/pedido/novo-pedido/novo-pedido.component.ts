@@ -56,6 +56,17 @@ export class NovoPedidoComponent implements OnInit {
     return 0;
   }
 
+  getValorTotalDoCarrinhoComFrete() {
+    const valorTotalDoCarrinho = this.getValorTotalDoCarrinho();
+    const valorFrete = this.pedido?.valorFrete ?? 0;
+
+    if (valorTotalDoCarrinho !== undefined) {
+      return valorTotalDoCarrinho + valorFrete;
+    }
+
+    return valorFrete;
+  }
+
   finalizarPedido() {
     const url = 'https://localhost:7042/api/pedido';
 

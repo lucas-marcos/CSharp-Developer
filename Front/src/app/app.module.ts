@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConsultarPedidoComponent } from './pedido/consultar-pedido/consultar-pedido.component';
 import { ClienteComponent } from './cadastro/cliente/cliente.component';
 import { ProdutoComponent } from './cadastro/produto/produto.component';
+import { LoginComponent } from './cadastro/login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ProdutoComponent } from './cadastro/produto/produto.component';
     ConsultarPedidoComponent,
     ClienteComponent,
     ProdutoComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserAnimationsModule,

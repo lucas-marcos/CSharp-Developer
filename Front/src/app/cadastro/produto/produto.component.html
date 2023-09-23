@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <h3 class="titulo">Produtos</h3>
+</div>
+<div class="box p-4 rounded">
+  <div class="d-flex flex-row gap-3 align-items-center mb-4">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="21"
+        viewBox="0 0 20 21"
+        fill="none"
+      >
+        <g clip-path="url(#clip0_6_930)">
+          <path
+            d="M13.6982 11.8079C14.3111 11.8079 14.8505 11.4662 15.1284 10.9496L18.0541 5.54124C18.3565 4.99124 17.9642 4.3079 17.3431 4.3079H5.24777L4.47955 2.64124H1.80713V4.3079H3.44164L6.38375 10.6329L5.28046 12.6662C4.68386 13.7829 5.46843 15.1412 6.71065 15.1412H16.5177V13.4746H6.71065L7.60963 11.8079H13.6982ZM6.02416 5.97457H15.9538L13.6982 10.1412H7.96105L6.02416 5.97457ZM6.71065 15.9746C5.81167 15.9746 5.08432 16.7246 5.08432 17.6412C5.08432 18.5579 5.81167 19.3079 6.71065 19.3079C7.60963 19.3079 8.34516 18.5579 8.34516 17.6412C8.34516 16.7246 7.60963 15.9746 6.71065 15.9746ZM14.8832 15.9746C13.9842 15.9746 13.2569 16.7246 13.2569 17.6412C13.2569 18.5579 13.9842 19.3079 14.8832 19.3079C15.7822 19.3079 16.5177 18.5579 16.5177 17.6412C16.5177 16.7246 15.7822 15.9746 14.8832 15.9746Z"
+            fill="#373A3C"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_6_930">
+            <rect
+              width="18.577"
+              height="20"
+              fill="white"
+              transform="translate(0.83432 0.974579)"
+            />
+          </clipPath>
+        </defs>
+      </svg>
+    <h4 class="titulo-menu">Produtos</h4>
+  </div>
+
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Imagem</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of produtos">
+          <th scope="row">{{ produto.id }}</th>
+          <td >
+            <img *ngIf="produto.imagemUrl"
+              [src]="produto.imagemUrl"
+              class="rounded-circle img-thumbnail"
+              style="max-width: 40px; max-height: 40px;"
+            >
+          </td>
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.precoUnitario | currency : "BRL" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
