@@ -1,0 +1,25 @@
+
+.codigo-produto {
+  color: rgba(0, 0, 0, 0.4);
+  font-family: "EuclidCircularB";
+  font-size: 17px;
+  font-weight: 200;
+  line-height: 30px;
+}
+
+.nome-produto {
+  color: #000;
+  font-family: "EuclidCircularB";
+  font-size: 18px !important;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.text-limitado {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 700px;
+  display: inline-block;
+}

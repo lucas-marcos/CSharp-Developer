@@ -2,7 +2,7 @@
   <h3 class="titulo">Novo Pedido</h3>
 
   <div class="box p-4 rounded">
-    <div class="d-flex flex-row gap-3">
+    <div class="d-flex flex-row gap-3 align-items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -18,23 +18,106 @@
       <h4 class="titulo-menu">Cliente</h4>
     </div>
 
-    <div class="d-flex mt-4 input-group col-6">
-      <input
-        type="text"
-        class="form-control input-text"
-        placeholder="Informe um cliente *"
-        style="
-          width: 609.384px;
-          height: 38.652px;
-          padding-left: 0px;
-          flex-shrink: 0;
-        "
+    <div class="d-flex mt-4 input-group col-6 pl-0">
+      <select
+        class="form-select input-text"
+        aria-label="Selecione um cliente"
+        [(ngModel)]="clienteSelecionado"
+        name="clienteSelecionado"
       >
+        <option value="" disabled selected>Selecione um cliente</option>
+        <option *ngFor="let cliente of clientes" [ngValue]="cliente">
+          {{ cliente.nome }}
+        </option>
+      </select>
       <div class="input-group-append">
-        <span class="input-group-text">
-          <i class="fa fa-search"></i> <!-- Ícone de pesquisa Font Awesome -->
+        <span class="input-group-text" disabled>
+          <i class="fa fa-search"></i>
         </span>
       </div>
     </div>
+  </div>
+
+  <div class="box p-4 rounded mt-4">
+    <div class="d-flex flex-row gap-3 align-items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="21"
+        viewBox="0 0 20 21"
+        fill="none"
+      >
+        <g clip-path="url(#clip0_6_930)">
+          <path
+            d="M13.6982 11.8079C14.3111 11.8079 14.8505 11.4662 15.1284 10.9496L18.0541 5.54124C18.3565 4.99124 17.9642 4.3079 17.3431 4.3079H5.24777L4.47955 2.64124H1.80713V4.3079H3.44164L6.38375 10.6329L5.28046 12.6662C4.68386 13.7829 5.46843 15.1412 6.71065 15.1412H16.5177V13.4746H6.71065L7.60963 11.8079H13.6982ZM6.02416 5.97457H15.9538L13.6982 10.1412H7.96105L6.02416 5.97457ZM6.71065 15.9746C5.81167 15.9746 5.08432 16.7246 5.08432 17.6412C5.08432 18.5579 5.81167 19.3079 6.71065 19.3079C7.60963 19.3079 8.34516 18.5579 8.34516 17.6412C8.34516 16.7246 7.60963 15.9746 6.71065 15.9746ZM14.8832 15.9746C13.9842 15.9746 13.2569 16.7246 13.2569 17.6412C13.2569 18.5579 13.9842 19.3079 14.8832 19.3079C15.7822 19.3079 16.5177 18.5579 16.5177 17.6412C16.5177 16.7246 15.7822 15.9746 14.8832 15.9746Z"
+            fill="#373A3C"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_6_930">
+            <rect
+              width="18.577"
+              height="20"
+              fill="white"
+              transform="translate(0.83432 0.974579)"
+            />
+          </clipPath>
+        </defs>
+      </svg>
+      <h4 class="titulo-menu">Carrinho</h4>
+    </div>
+
+    <div class="d-flex mt-4 input-group col-6 pl-0">
+      <select
+        class="form-select input-text"
+        aria-label="Selecione um produto"
+        [(ngModel)]="produtoSelecionado"
+        name="produtoSelecionado"
+      >
+        <option value="" disabled selected>Selecione um cliente</option>
+        <option *ngFor="let produto of produtos" [ngValue]="produto">
+          {{ produto.codigo + " - " + produto.nome }}
+        </option>
+      </select>
+      <div class="input-group-append">
+        <span class="input-group-text" disabled>
+          <i class="fa fa-search"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="carrinho-vazio" *ngIf="produtos.length == 0">
+      <div class="d-flex justify-content-center mt-5 mb-5">
+        <img
+          src="../../../assets/icones/imagem-carrinho-empty-state.png"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <div class="mt-5">
+      <div *ngFor="let produto of produtos" class="border-top border-bottom">
+          <div class="d-flex pb-3 pt-3">
+              <img
+                  [src]="produto.imagemUrl"
+                  style="
+                      border-radius: 241.5px;
+                      background: url(produto.imagemUrl),
+                          lightgray 50% / cover no-repeat;
+                      width: 101px;
+                      height: 101px;
+                      flex-shrink: 0;
+                  "
+              />
+              <div class="descricao-e-codigo ml-4 mt-auto">
+                  <h5 class="codigo-produto">{{ produto.codigo }}</h5>
+                  <p class="nome-produto">
+                      <span class="text-limitado" [title]="produto.nome">{{ produto.nome }}</span>
+                  </p>
+              </div>
+          </div>
+      </div>
+  </div>
+
   </div>
 </div>
