@@ -1,4 +1,6 @@
+using AutoMapper;
 using Back.Data;
+using Back.Framework;
 using Back.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -13,6 +15,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+var config = new MapperConfiguration(cfg => { cfg.AddProfile(new MappingProfile()); });
+var mapper = config.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "MaximaTech API", Version = "v1" }); });
 
