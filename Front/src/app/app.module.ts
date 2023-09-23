@@ -7,6 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import { NovoPedidoComponent } from './pedido/novo-pedido/novo-pedido.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,10 +17,12 @@ import { FormsModule } from '@angular/forms';
     NovoPedidoComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

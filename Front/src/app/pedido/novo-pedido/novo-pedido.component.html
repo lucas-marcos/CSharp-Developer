@@ -22,11 +22,11 @@
       <select
         class="form-select input-text"
         aria-label="Selecione um cliente"
-        [(ngModel)]="clienteSelecionado"
+        [(ngModel)]="pedido.clienteId"
         name="clienteSelecionado"
       >
         <option value="" disabled selected>Selecione um cliente</option>
-        <option *ngFor="let cliente of clientes" [ngValue]="cliente">
+        <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">
           {{ cliente.nome }}
         </option>
       </select>
@@ -89,7 +89,7 @@
       </div>
     </div>
 
-    <div class="carrinho-vazio" *ngIf="produtosDoCarrinho.length == 0">
+    <div class="carrinho-vazio" *ngIf="pedido.produtosDoCarrinho.length == 0">
       <div class="d-flex justify-content-center mt-5 mb-5">
         <img
           src="../../../assets/icones/imagem-carrinho-empty-state.png"
@@ -100,7 +100,7 @@
 
     <div class="mt-5">
       <div
-        *ngFor="let produtoDoCarrinho of produtosDoCarrinho"
+        *ngFor="let produtoDoCarrinho of pedido.produtosDoCarrinho"
         class="border-top border-bottom pb-3 pt-3"
       >
         <div class="d-flex">
@@ -193,7 +193,7 @@
           <p class="texto-total">Frete</p>
           <p class="ml-auto">
             {{
-              valorFrete | currency : "BRL" : "symbol" : "1.2-2"
+              pedido.valorFrete | currency : "BRL" : "symbol" : "1.2-2"
             }}
           </p>
         </div>
@@ -212,11 +212,12 @@
           <button
             class="btn btn-success botao-finlizar"
             style="background-color: #5cb85c; border-radius: 4px"
+            (click)="finalizarPedido()"
           >
             Finalizar Pedido
           </button>
         </div>
-        <button class="btn btn-dark botao-finlizar bg-white text-dark">
+        <button class="btn btn-dark botao-finlizar bg-white text-dark" (click)="limparCarrinho()">
           Limpar Carrinho
         </button>
       </div>

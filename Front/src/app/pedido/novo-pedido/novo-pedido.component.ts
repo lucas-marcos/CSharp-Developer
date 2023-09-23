@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Cliente } from 'src/models/cliente';
 import { Produto } from 'src/models/produto';
 import { ProdutosDoCarrinho } from 'src/models/produtos-do-carrinho';
+import { NovoPedido } from 'src/models/novo-pedido';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-novo-pedido',
@@ -11,15 +13,14 @@ import { ProdutosDoCarrinho } from 'src/models/produtos-do-carrinho';
 })
 export class NovoPedidoComponent implements OnInit {
   clientes: Cliente[] = [];
-  clienteSelecionado: Cliente = {};
   produtos: Produto[] = [];
   produtoSelecionado: Produto = {};
 
-  produtosDoCarrinho: ProdutosDoCarrinho[] = [];
+  pedido: NovoPedido = {
+    produtosDoCarrinho: [],
+  };
 
-  valorFrete: number = 0;
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,  private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.obterClientes();
@@ -27,7 +28,7 @@ export class NovoPedidoComponent implements OnInit {
   }
 
   adicionarProdutoAoCarrinho() {
-    this.produtosDoCarrinho.push(
+    this.pedido.produtosDoCarrinho.push(
       new ProdutosDoCarrinho(this.produtoSelecionado, 1)
     );
 
@@ -37,7 +38,7 @@ export class NovoPedidoComponent implements OnInit {
   getValorTotalDoCarrinho(): number {
     let valorTotal = 0;
 
-    this.produtosDoCarrinho.forEach((produto) => {
+    this.pedido.produtosDoCarrinho.forEach((produto) => {
       valorTotal += this.calcularValorTotal(produto);
     });
 
@@ -55,10 +56,28 @@ export class NovoPedidoComponent implements OnInit {
     return 0;
   }
 
+  finalizarPedido(){
+    const url = 'https://localhost:7042/api/pedido';
+
+    this.http.post<any[]>(url, this.pedido).subscribe(
+      (response) => {
+        this.toastr.success('Pedido finalizado com sucesso!');
+      },
+      (error) => {
+        this.toastr.error('Erro ao finalizar pedido:', error.error);
+      }
+    );
+  }
+
+  limparCarrinho(){
+    this.pedido.produtosDoCarrinho = [];
+    this.pedido.valorFrete = 0;
+  }
+
   obterPrecoFrete() {
     var qtdItens = 0;
 
-    this.produtosDoCarrinho.forEach(produto => {
+    this.pedido.produtosDoCarrinho.forEach(produto => {
       qtdItens += produto.quantidade;
     });
 
@@ -66,10 +85,10 @@ export class NovoPedidoComponent implements OnInit {
 
     this.http.get<number>(url).subscribe(
       (response) => {
-        this.valorFrete = response;
+        this.pedido.valorFrete = response;
       },
       (error) => {
-        console.error('Erro ao obter o valor do frete:', error);
+        this.toastr.error('Erro ao obter o valor do frete:', error);
       }
     );
   }
@@ -82,7 +101,7 @@ export class NovoPedidoComponent implements OnInit {
         this.clientes = response;
       },
       (error) => {
-        console.error('Erro ao obter a lista de clientes:', error);
+        this.toastr.error('Erro ao obter a lista de clientes:', error);
       }
     );
   }
@@ -95,7 +114,7 @@ export class NovoPedidoComponent implements OnInit {
         this.produtos = response;
       },
       (error) => {
-        console.error('Erro ao obter a lista de produtos:', error);
+        this.toastr.error('Erro ao obter a lista de produtos:', error);
       }
     );
   }
