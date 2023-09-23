@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConsultarPedidoComponent } from './pedido/consultar-pedido/consultar-pedido.component';
+import { ClienteComponent } from './cadastro/cliente/cliente.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ConsultarPedidoComponent } from './pedido/consultar-pedido/consultar-pe
     HeaderComponent,
     NovoPedidoComponent,
     ConsultarPedidoComponent,
+    ClienteComponent,
   ],
   imports: [
     BrowserAnimationsModule,

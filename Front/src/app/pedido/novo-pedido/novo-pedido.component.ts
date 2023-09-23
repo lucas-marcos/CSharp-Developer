@@ -62,6 +62,7 @@ export class NovoPedidoComponent implements OnInit {
     this.http.post<any[]>(url, this.pedido).subscribe(
       (response) => {
         this.toastr.success('Pedido finalizado com sucesso!');
+        this.limparCarrinho();
       },
       (error) => {
         this.toastr.error(error.error, 'Pedido');
@@ -70,15 +71,17 @@ export class NovoPedidoComponent implements OnInit {
   }
 
   limparCarrinho() {
-    this.pedido.produtosDoCarrinho = [];
-    this.pedido.valorFrete = 0;
+    this.pedido = {
+      produtosDoCarrinho: [],
+    };
+    this.produtoSelecionado = {};
   }
 
   obterPrecoFrete() {
     var qtdItens = 0;
 
     this.pedido.produtosDoCarrinho.forEach((produto) => {
-      qtdItens += produto.quantidade;
+      qtdItens += produto.quantidade ?? 0;
     });
 
     const url = `https://localhost:7128/api/frete/calcular/qtd-itens/${qtdItens}`;
