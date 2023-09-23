@@ -26,4 +26,13 @@ public class PedidoController : ControllerBase
 
         return Ok(_mapper.Map<PedidoTO>(pedido));
     }
+    
+    [HttpGet]
+    public ActionResult<List<PedidoTO>> Get()
+    {
+        var pedido = _pedidoServices.BuscarTodos();
+
+        return Ok(_mapper.Map<List<PedidoTO>>(pedido));
+    }
+    
 }

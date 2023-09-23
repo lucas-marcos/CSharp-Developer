@@ -13,6 +13,8 @@ public class PedidoServices : IPedidoServices
         _pedidoRepository = pedidoRepository;
     }
 
+    public List<Pedido> BuscarTodos() => _pedidoRepository.BuscarTodos().ToList();
+
     public Pedido Cadastrar(Pedido pedido)
     {
         _pedidoRepository.AdicionarAtualizarSalvar(pedido);
