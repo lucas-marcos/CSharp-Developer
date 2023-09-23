@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cliente } from 'src/models/cliente';
 import { Produto } from 'src/models/produto';
+import { ProdutosDoCarrinho } from 'src/models/produtos-do-carrinho';
 
 @Component({
   selector: 'app-novo-pedido',
@@ -14,12 +15,32 @@ export class NovoPedidoComponent implements OnInit {
   produtos: Produto[] = [];
   produtoSelecionado: Produto = {};
 
+  produtosDoCarrinho: ProdutosDoCarrinho[] = [];
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.obterClientes();
     this.obterProdutos();
   }
+
+
+  adicionarProdutoAoCarrinho(){
+    this.produtosDoCarrinho.push(new ProdutosDoCarrinho(this.produtoSelecionado, 1));
+  }
+
+  calcularValorTotal(produtosDoCarrinho: ProdutosDoCarrinho) : number{
+    const precoUnitario = produtosDoCarrinho?.produto?.precoUnitario;
+    const quantidade = produtosDoCarrinho?.quantidade;
+
+    if (precoUnitario !== undefined && quantidade !== undefined) {
+        return precoUnitario * quantidade;
+    }
+
+    return 0;
+  }
+
+
 
   obterClientes() {
     const url = 'https://localhost:7042/api/cliente';

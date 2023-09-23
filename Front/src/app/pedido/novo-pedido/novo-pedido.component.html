@@ -73,6 +73,7 @@
         aria-label="Selecione um produto"
         [(ngModel)]="produtoSelecionado"
         name="produtoSelecionado"
+        (change)="adicionarProdutoAoCarrinho()"
       >
         <option value="" disabled selected>Selecione um cliente</option>
         <option *ngFor="let produto of produtos" [ngValue]="produto">
@@ -86,7 +87,7 @@
       </div>
     </div>
 
-    <div class="carrinho-vazio" *ngIf="produtos.length == 0">
+    <div class="carrinho-vazio" *ngIf="produtosDoCarrinho.length == 0">
       <div class="d-flex justify-content-center mt-5 mb-5">
         <img
           src="../../../assets/icones/imagem-carrinho-empty-state.png"
@@ -97,12 +98,12 @@
 
     <div class="mt-5">
       <div
-        *ngFor="let produto of produtos"
+        *ngFor="let produtoDoCarrinho of produtosDoCarrinho"
         class="border-top border-bottom pb-3 pt-3"
       >
         <div class="d-flex">
           <img
-            [src]="produto.imagemUrl"
+            [src]="produtoDoCarrinho.produto.imagemUrl"
             style="
               border-radius: 241.5px;
               background: url(produto.imagemUrl),
@@ -113,10 +114,10 @@
             "
           />
           <div class="descricao-e-codigo ml-4 mt-auto col-9">
-            <h5 class="codigo-produto">{{ produto.codigo }}</h5>
+            <h5 class="codigo-produto">{{ produtoDoCarrinho.produto.codigo }}</h5>
             <p class="nome-produto">
-              <span class="text-limitado" [title]="produto.nome">{{
-                produto.nome
+              <span class="text-limitado" [title]="produtoDoCarrinho.produto.nome">{{
+                produtoDoCarrinho.produto.nome
               }}</span>
             </p>
           </div>
@@ -128,14 +129,15 @@
                 id="quantidade"
                 placeholder="1"
                 class="form-control col-2"
+                [(ngModel)]="produtoDoCarrinho.quantidade"
               />
               <p class="my-auto preco-produto">
-                X {{ produto.precoUnitario | currency : "BRL" }}
+                X {{ produtoDoCarrinho.produto.precoUnitario | currency : "BRL" }}
               </p>
             </div>
             <p>
               {{
-                produto.precoUnitario | currency : "BRL" : "symbol" : "1.2-2"
+                calcularValorTotal(produtoDoCarrinho) | currency : "BRL" : "symbol" : "1.2-2"
               }}
             </p>
           </div>
