@@ -1,7 +1,9 @@
 using AutoMapper;
+using Back.Controller.Filters;
 using Back.Data;
 using Back.Framework;
 using Back.Interface;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -20,6 +22,19 @@ var mapper = config.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "MaximaTech API", Version = "v1" }); });
+
+#region Filtro para validar o ModelState
+
+builder.Services.Configure<ApiBehaviorOptions>(options
+    => options.SuppressModelStateInvalidFilter = true);
+builder.Services.AddScoped<ModelStateValidationFilter>();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ModelStateValidationFilter>();
+    options.Filters.Add<ExceptionFilter>();
+});
+
+#endregion
 
 InjecaoDepedencia(builder.Services);
 
