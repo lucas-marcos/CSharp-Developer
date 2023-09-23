@@ -17,6 +17,8 @@ export class NovoPedidoComponent implements OnInit {
 
   produtosDoCarrinho: ProdutosDoCarrinho[] = [];
 
+  valorFrete: number = 0;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -24,23 +26,53 @@ export class NovoPedidoComponent implements OnInit {
     this.obterProdutos();
   }
 
+  adicionarProdutoAoCarrinho() {
+    this.produtosDoCarrinho.push(
+      new ProdutosDoCarrinho(this.produtoSelecionado, 1)
+    );
 
-  adicionarProdutoAoCarrinho(){
-    this.produtosDoCarrinho.push(new ProdutosDoCarrinho(this.produtoSelecionado, 1));
+    this.obterPrecoFrete();
   }
 
-  calcularValorTotal(produtosDoCarrinho: ProdutosDoCarrinho) : number{
+  getValorTotalDoCarrinho(): number {
+    let valorTotal = 0;
+
+    this.produtosDoCarrinho.forEach((produto) => {
+      valorTotal += this.calcularValorTotal(produto);
+    });
+
+    return valorTotal;
+  }
+
+  calcularValorTotal(produtosDoCarrinho: ProdutosDoCarrinho): number {
     const precoUnitario = produtosDoCarrinho?.produto?.precoUnitario;
     const quantidade = produtosDoCarrinho?.quantidade;
 
     if (precoUnitario !== undefined && quantidade !== undefined) {
-        return precoUnitario * quantidade;
+      return precoUnitario * quantidade;
     }
 
     return 0;
   }
 
+  obterPrecoFrete() {
+    var qtdItens = 0;
 
+    this.produtosDoCarrinho.forEach(produto => {
+      qtdItens += produto.quantidade;
+    });
+
+    const url = `https://localhost:7128/api/frete/calcular/qtd-itens/${qtdItens}`;
+
+    this.http.get<number>(url).subscribe(
+      (response) => {
+        this.valorFrete = response;
+      },
+      (error) => {
+        console.error('Erro ao obter o valor do frete:', error);
+      }
+    );
+  }
 
   obterClientes() {
     const url = 'https://localhost:7042/api/cliente';

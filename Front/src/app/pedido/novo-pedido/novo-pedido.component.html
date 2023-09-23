@@ -38,6 +38,8 @@
     </div>
   </div>
 
+  <!-- CARRINHO -->
+
   <div class="box p-4 rounded mt-4">
     <div class="d-flex flex-row gap-3 align-items-center">
       <svg
@@ -114,11 +116,15 @@
             "
           />
           <div class="descricao-e-codigo ml-4 mt-auto col-9">
-            <h5 class="codigo-produto">{{ produtoDoCarrinho.produto.codigo }}</h5>
+            <h5 class="codigo-produto">
+              {{ produtoDoCarrinho.produto.codigo }}
+            </h5>
             <p class="nome-produto">
-              <span class="text-limitado" [title]="produtoDoCarrinho.produto.nome">{{
-                produtoDoCarrinho.produto.nome
-              }}</span>
+              <span
+                class="text-limitado"
+                [title]="produtoDoCarrinho.produto.nome"
+                >{{ produtoDoCarrinho.produto.nome }}</span
+              >
             </p>
           </div>
 
@@ -132,16 +138,87 @@
                 [(ngModel)]="produtoDoCarrinho.quantidade"
               />
               <p class="my-auto preco-produto">
-                X {{ produtoDoCarrinho.produto.precoUnitario | currency : "BRL" }}
+                X
+                {{ produtoDoCarrinho.produto.precoUnitario | currency : "BRL" }}
               </p>
             </div>
             <p>
               {{
-                calcularValorTotal(produtoDoCarrinho) | currency : "BRL" : "symbol" : "1.2-2"
+                calcularValorTotal(produtoDoCarrinho)
+                  | currency : "BRL" : "symbol" : "1.2-2"
               }}
             </p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOTAL -->
+
+  <div class="box p-4 rounded mt-4 col">
+    <div class="row">
+      <div class="d-flex flex-row gap-3 align-items-center mb-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="13"
+          height="15"
+          viewBox="0 0 13 15"
+          fill="none"
+        >
+          <g clip-path="url(#clip0_5061_146)">
+            <path
+              d="M11.6071 0H1.39286C0.65 0 0 0.65625 0 1.40625V13.5938C0 14.3438 0.65 15 1.39286 15H11.6071C12.35 15 13 14.3438 13 13.5938V1.40625C13 0.65625 12.35 0 11.6071 0ZM3.71429 12.75C3.71429 12.9375 3.52857 13.125 3.34286 13.125H2.22857C2.04286 13.125 1.85714 12.9375 1.85714 12.75V11.625C1.85714 11.4375 2.04286 11.25 2.22857 11.25H3.34286C3.52857 11.25 3.71429 11.4375 3.71429 11.625V12.75ZM3.71429 9C3.71429 9.1875 3.52857 9.375 3.34286 9.375H2.22857C2.04286 9.375 1.85714 9.1875 1.85714 9V7.875C1.85714 7.6875 2.04286 7.5 2.22857 7.5H3.34286C3.52857 7.5 3.71429 7.6875 3.71429 7.875V9ZM7.42857 12.75C7.42857 12.9375 7.24286 13.125 7.05714 13.125H5.94286C5.75714 13.125 5.57143 12.9375 5.57143 12.75V11.625C5.57143 11.4375 5.75714 11.25 5.94286 11.25H7.05714C7.24286 11.25 7.42857 11.4375 7.42857 11.625V12.75ZM7.42857 9C7.42857 9.1875 7.24286 9.375 7.05714 9.375H5.94286C5.75714 9.375 5.57143 9.1875 5.57143 9V7.875C5.57143 7.6875 5.75714 7.5 5.94286 7.5H7.05714C7.24286 7.5 7.42857 7.6875 7.42857 7.875V9ZM11.1429 12.75C11.1429 12.9375 10.9571 13.125 10.7714 13.125H9.65714C9.47143 13.125 9.28571 12.9375 9.28571 12.75V7.875C9.28571 7.6875 9.47143 7.5 9.65714 7.5H10.7714C10.9571 7.5 11.1429 7.6875 11.1429 7.875V12.75ZM11.1429 5.25C11.1429 5.4375 10.9571 5.625 10.7714 5.625H2.22857C2.04286 5.625 1.85714 5.4375 1.85714 5.25V2.25C1.85714 2.0625 2.04286 1.875 2.22857 1.875H10.7714C10.9571 1.875 11.1429 2.0625 11.1429 2.25V5.25Z"
+              fill="#373A3C"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_5061_146">
+              <rect width="13" height="15" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+        <h4 class="titulo-menu">Total</h4>
+      </div>
+      <div class="col-6">
+        <div class="d-flex col">
+          <p class="texto-total">Itens</p>
+          <p class="ml-auto">
+            {{
+              getValorTotalDoCarrinho() | currency : "BRL" : "symbol" : "1.2-2"
+            }}
+          </p>
+        </div>
+        <div class="d-flex col">
+          <p class="texto-total">Frete</p>
+          <p class="ml-auto">
+            {{
+              valorFrete | currency : "BRL" : "symbol" : "1.2-2"
+            }}
+          </p>
+        </div>
+        <div class="d-flex col border-top pt-3">
+          <p class="texto-total">Total</p>
+          <p class="ml-auto">
+            {{
+              getValorTotalDoCarrinho() | currency : "BRL" : "symbol" : "1.2-2"
+            }}
+          </p>
+        </div>
+      </div>
+
+      <div class="d-flex row col-6 justify-content-center">
+        <div class="row col-8">
+          <button
+            class="btn btn-success botao-finlizar"
+            style="background-color: #5cb85c; border-radius: 4px"
+          >
+            Finalizar Pedido
+          </button>
+        </div>
+        <button class="btn btn-dark botao-finlizar bg-white text-dark">
+          Limpar Carrinho
+        </button>
       </div>
     </div>
   </div>
